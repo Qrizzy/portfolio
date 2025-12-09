@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, useLocation, useOutlet } from 'react-router-dom';
+import { useLocation, useOutlet } from 'react-router-dom';
 import ProfileSidebar from './ProfileSidebar';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -8,8 +8,6 @@ const ProfileLayout: React.FC = () => {
     const element = useOutlet(); // Capture element for animation
 
     // Simple logic: About is "left" (index 0), Skills is "right" (index 1)
-    const isSkills = location.pathname.includes('skills');
-    const direction = isSkills ? 1 : -1;
 
     // Override direction for initial load or if we want smarter logic
     // But simply: if moving TO skills (next), direction 1. If TO about (prev), direction -1.

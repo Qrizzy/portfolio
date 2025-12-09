@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, MapPin, User, Linkedin, Github, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Github, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -17,10 +17,6 @@ const ProfileSidebar: React.FC = () => {
     const handleNext = () => {
         setCurrentIndex((prev) => (prev + 1) % images.length);
         if (!hasClicked) setHasClicked(true);
-    };
-
-    const handlePrev = () => {
-        setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
     };
 
     return (
