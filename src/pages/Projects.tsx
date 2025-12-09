@@ -1,40 +1,153 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Box } from 'lucide-react';
+import { ArrowLeft, Box, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
+import ProjectDialog, { type ProjectData } from '../components/ProjectDialog';
+
+
+// Placeholder Helpers
+const getPlaceholder = (text: string, color: string) =>
+    `https://placehold.co/800x600/${color}/white?text=${encodeURIComponent(text)}`;
+
+const projectData: ProjectData[] = [
+    {
+        id: 1,
+        title: "Teklinx Web Projects",
+        subtitle: "Degree Internship",
+        description: "During my internship at Teklinx, I contributed to various web development projects, focusing on frontend interfaces and user experience optimization. This collection highlights the diverse range of client solutions and internal tools I helped build.",
+        layout: "horizontal",
+        isPrivate: true,
+        tags: ["Visual Studio", "TypeScript", "React.js", "Tailwind CSS", "IntelliJ", "Java", "PostgreSQL", "SpringBoot", "Docker"],
+        images: [
+            { src: getPlaceholder('Teklinx Project 1', '1e293b'), title: 'Corporate Dashboard', description: 'A comprehensive dashboard for internal management, featuring real-time data visualization and user role management.' },
+            { src: getPlaceholder('Teklinx Project 2', '3b4252'), title: 'E-Commerce Platform', description: 'Responsive frontend for a local fashion brand with integrated cart functionality and payment gateway interfaces.' },
+            { src: getPlaceholder('Teklinx Project 3', '2e3440'), title: 'Client Portal', description: 'Secure portal for clients to access project status, documents, and communication channels.' },
+        ]
+    },
+    {
+        id: 2,
+        title: "COMPET: Educational Petcare Mobile Quiz Game",
+        subtitle: "Final Year Project",
+        description: "COMPET is a gamified educational application designed to teach pet care responsibilities. It combines mobile game mechanics with real-world pet care knowledge to engage users.",
+        layout: "vertical",
+        githubUrl: "https://github.com/Qrizzy/COMPET",
+        downloadUrl: "https://drive.google.com/file/d/1txNmiBNRs2M-kIkKE1xvNWI-XgZB1EDb/view?usp=sharing",
+        tags: ["Unity", "C#", "Blender", "Adobe Illustrator"],
+        images: [
+            { src: getPlaceholder('COMPET 1', '5e81ac'), title: 'Main Game Interface', description: 'The primary game loop where users interact with their virtual pets, manage stats, and complete daily tasks.' },
+            { src: getPlaceholder('COMPET 2', '81a1c1'), title: 'Care Modules', description: 'Interactive learning modules covering topics like nutrition, hygiene, and health checkups.' },
+            { src: getPlaceholder('COMPET 3', '88c0d0'), title: 'Progress Tracking', description: 'User progress dashboard showing learning achievements and pet health statistics over time.' },
+        ]
+    },
+    {
+        id: 3,
+        title: "Car Rental Mobile App",
+        subtitle: "Collaborative Group Project",
+        description: "A collaborative effort to build a user-friendly car rental mobile application. The app streamlines the booking process with a modern interface and robust backend integration.",
+        layout: "vertical",
+        githubUrl: "https://github.com/AnasHakimi/Car_Rental_Mobile_Application",
+        tags: ["Kotlin", "Android Studio", "Prestige", "Adobe Illustrator"],
+        images: [
+            { src: getPlaceholder('Car Rental 1', 'bf616a'), title: 'Vehicle Selection', description: 'Intuitive browsing experience with advanced filters for vehicle type, price range, and availability.' },
+            { src: getPlaceholder('Car Rental 2', 'd08770'), title: 'Booking Flow', description: 'Seamless booking process with integrated calendar selection, insurance options, and secure checkout.' },
+            { src: getPlaceholder('Car Rental 3', 'ebcb8b'), title: 'User Profile & History', description: 'Comprehensive user profile section managing active rentals, past history, and payment methods.' },
+        ]
+    }
+];
 
 const Projects: React.FC = () => {
+    const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
+
     return (
-        <div className="min-h-screen p-8 md:p-16 flex flex-col items-center justify-center text-center relative">
+        <div className="min-h-screen p-8 md:p-16 flex flex-col items-center relative">
+            {/* Background Elements */}
             <Link to="/" className="absolute top-6 left-6 p-2 rounded-full bg-white/80 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-all shadow-sm z-30 group">
                 <ArrowLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
             </Link>
-            <div className="w-24 h-24 bg-cyan-100 dark:bg-cyan-500/10 rounded-2xl flex items-center justify-center mb-6 animate-bounce">
-                <Box className="w-12 h-12 text-cyan-600 dark:text-cyan-400" />
+
+            <div className="w-full max-w-6xl mt-10 mb-12 flex flex-col items-center text-center">
+                <div className="w-20 h-20 bg-cyan-100 dark:bg-cyan-500/10 rounded-2xl flex items-center justify-center mb-6 animate-bounce">
+                    <Box className="w-10 h-10 text-cyan-600 dark:text-cyan-400" />
+                </div>
+                <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500 dark:from-cyan-400 dark:to-purple-400 mb-4">
+                    Projects Showcase
+                </h1>
+                <p className="text-xl text-slate-500 dark:text-slate-400 max-w-2xl">
+                    Explore my featured work, ranging from web applications to mobile experiences and game development.
+                </p>
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500 dark:from-cyan-400 dark:to-purple-400 mb-4">
-                Projects Showcase
-            </h1>
-            <p className="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-12">
-                This section is currently under development. Soon it will display a collection of my best frontend work.
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl px-4">
+                {projectData.map((project) => (
+                    <motion.div
+                        key={project.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: project.id * 0.1 }}
+                        viewport={{ once: true }}
+                        onClick={() => setSelectedProject(project)}
+                        className="group relative bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-800 cursor-pointer hover:shadow-2xl hover:border-cyan-500/30 transition-all duration-300"
+                    >
+                        {/* Card Image Preview */}
+                        <div className="w-full h-48 overflow-hidden relative">
+                            <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10" />
+                            <img
+                                src={project.images[0].src}
+                                alt={project.title}
+                                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                            />
+                            {/* Overlay Icon */}
+                            <div className="absolute top-4 right-4 bg-white/90 dark:bg-slate-800/90 p-2 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 z-20">
+                                <ExternalLink className="w-4 h-4 text-cyan-500" />
+                            </div>
+                        </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
-                {/* Project Placeholders */}
-                {[1, 2, 3].map((i) => (
-                    <div key={i} className="aspect-video rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 flex items-center justify-center group hover:border-cyan-500/50 transition-all cursor-pointer shadow-sm dark:shadow-none">
-                        <span className="text-slate-500 dark:text-slate-400 font-medium group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">Project {i} Placeholder</span>
-                    </div>
+                        {/* Card Content */}
+                        <div className="p-6">
+                            <div className="text-xs font-bold text-cyan-500 uppercase tracking-wider mb-2">
+                                {project.layout === 'horizontal' ? 'Web Development' : 'Mobile Application'}
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-500 transition-colors">
+                                {project.title}
+                            </h3>
+                            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
+                                {project.subtitle}
+                            </p>
+
+                            {/* Tags Preview */}
+                            {project.tags && (
+                                <div className="flex flex-wrap gap-2 mt-3">
+                                    {project.tags.slice(0, 3).map((tag, idx) => (
+                                        <span key={idx} className="text-xs px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-md text-slate-600 dark:text-slate-400 font-medium">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                    {project.tags.length > 3 && (
+                                        <span className="text-xs px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-md text-slate-500 dark:text-slate-500 font-medium">
+                                            +{project.tags.length - 3}
+                                        </span>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    </motion.div>
                 ))}
             </div>
 
             <Link
                 to="/profile/skills"
-                className="mt-16 flex items-center gap-2 text-slate-500 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"
+                className="mt-20 flex items-center gap-2 text-slate-500 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"
             >
                 <ArrowLeft className="w-5 h-5" />
                 <span>Back to Skills</span>
             </Link>
+
+            {/* Project Details Dialog */}
+            <ProjectDialog
+                project={selectedProject}
+                isOpen={!!selectedProject}
+                onClose={() => setSelectedProject(null)}
+            />
         </div>
     );
 };
