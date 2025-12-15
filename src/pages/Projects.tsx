@@ -19,6 +19,7 @@ import dvViewDoc from '../assets/dv_viewdoc.png';
 import adminDash from '../assets/admindash.png';
 import attRequestDialog from '../assets/att_requestdialog.png';
 import attUpload from '../assets/att_upload.png';
+import attGenerate from '../assets/att_generate.png';
 
 import lprRLogin from '../assets/lpr_r_login.png';
 import lprRDashboard from '../assets/lpr_r_dashboard.png';
@@ -81,6 +82,7 @@ const projectData: ProjectData[] = [
                     { src: attViewAtt, title: 'Employee Details', description: 'Admins can view detailed employee profiles and their daily attendance records, as well as download attendance reports.' },
                     { src: attRequest, title: 'Correction Requests', description: 'Employees can submit correction requests for their clock-in and clock-out times, which admins can then approve or deny.' },
                     { src: attRequestDialog, title: 'Proof Verification', description: 'Admins can verify the proof documents submitted by employees to support their correction requests.' },
+                    { src: attGenerate, title: 'Generate Report', description: 'Admins can generate comprehensive attendance reports for specific departments and date ranges, with options for different file formats.' },
                     { src: attUpload, title: 'Mass Upload', description: 'Admins can perform mass uploads of attendance sheets into the system and download the preset template for data entry.' },
                 ]
             },
