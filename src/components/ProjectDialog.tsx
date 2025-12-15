@@ -3,6 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Github, Lock, Download } from 'lucide-react';
 import ImageCarousel, { type CarouselImage } from './ImageCarousel';
 
+export interface ProjectTab {
+    id: string;
+    title: string;
+    images: CarouselImage[];
+}
+
 export interface ProjectData {
     id: number;
     title: string;
@@ -10,6 +16,7 @@ export interface ProjectData {
     description: string; // Overall project description
     layout: 'horizontal' | 'vertical'; // Maps to ImageCarousel 'mode'
     images: CarouselImage[];
+    tabs?: ProjectTab[]; // Optional categories for images
     githubUrl?: string;
     isPrivate?: boolean;
     downloadUrl?: string;
@@ -23,15 +30,31 @@ interface ProjectDialogProps {
 }
 
 const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, isOpen, onClose }) => {
-    // Lock body scroll when open
+    const [activeTabId, setActiveTabId] = React.useState<string | null>(null);
+
+    // Lock body scroll when open and reset tabs
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
+            setActiveTabId(null); // Always start with "Overview" (no tab selected)
         } else {
             document.body.style.overflow = 'unset';
+            setActiveTabId(null); // Reset on close
         }
         return () => { document.body.style.overflow = 'unset'; };
     }, [isOpen]);
+
+    const handleTabChange = (id: string) => setActiveTabId(id);
+
+    // Determine images to show
+    const displayImages = React.useMemo(() => {
+        if (!project) return [];
+        if (project.tabs && activeTabId) {
+            const tab = project.tabs.find(t => t.id === activeTabId);
+            return tab ? tab.images : [];
+        }
+        return project.images;
+    }, [project, activeTabId]);
 
     if (!project) return null;
 
@@ -137,12 +160,44 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, isOpen, onClose 
                                     </p>
                                 </div>
 
+                                {/* Tabs Navigation */}
+                                {project.tabs && project.tabs.length > 0 && (
+                                    <div className="mb-6">
+                                        <h4 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                                            Contributed Projects
+                                            <span className="text-xs font-normal normal-case text-slate-400 dark:text-slate-500">
+                                                (Click to view the project features)
+                                            </span>
+                                        </h4>
+                                        <div className="flex flex-wrap gap-2">
+                                            {project.tabs.map((tab) => (
+                                                <button
+                                                    key={tab.id}
+                                                    onClick={() => handleTabChange(tab.id)}
+                                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${activeTabId === tab.id
+                                                        ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/25'
+                                                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                                                        }`}
+                                                >
+                                                    {tab.title}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
                                 {/* Carousel Area */}
                                 <div className="w-full">
-                                    <ImageCarousel
-                                        images={project.images}
-                                        mode={project.layout}
-                                    />
+                                    {displayImages.length > 0 ? (
+                                        <ImageCarousel
+                                            images={displayImages}
+                                            mode={project.layout}
+                                        />
+                                    ) : (
+                                        <div className="w-full h-64 bg-slate-100 dark:bg-slate-900 rounded-xl flex items-center justify-center text-slate-500 dark:text-slate-400">
+                                            No images available for this section.
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </motion.div>

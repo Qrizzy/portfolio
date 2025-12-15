@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import NavigationMenu from '../components/NavigationMenu';
 
 const IntroPage: React.FC = () => {
     return (
         <div className="h-screen flex flex-col justify-between items-center p-8 relative overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+            <NavigationMenu />
             {/* Background decorations */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" />

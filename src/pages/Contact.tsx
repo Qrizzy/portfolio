@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Mail, Github, Linkedin, ArrowLeft } from 'lucide-react';
+import { Mail, Github, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
+import NavigationMenu from '../components/NavigationMenu';
 
 const Contact: React.FC = () => {
     return (
@@ -12,9 +12,7 @@ const Contact: React.FC = () => {
                 <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-700" />
             </div>
 
-            <Link to="/projects" className="absolute top-6 left-6 p-2 rounded-full bg-white/80 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-all shadow-sm z-30 group">
-                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
-            </Link>
+            <NavigationMenu />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

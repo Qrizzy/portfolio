@@ -1,7 +1,7 @@
 import React from 'react';
-import { Mail, MapPin, Linkedin, Github, ArrowLeft } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Github } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import NavigationMenu from './NavigationMenu';
 
 import soloImg from '../assets/solo.jpg';
 import catImg from '../assets/cat.jpg';
@@ -19,11 +19,11 @@ const ProfileSidebar: React.FC = () => {
         if (!hasClicked) setHasClicked(true);
     };
 
+    // ... existing code ...
+
     return (
         <div className="w-full lg:w-1/3 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl border-r border-slate-200 dark:border-slate-800 p-8 flex flex-col items-center text-center lg:h-screen lg:sticky lg:top-0 z-20 transition-colors duration-300 relative">
-            <Link to="/" className="absolute top-6 left-6 p-2 rounded-full bg-white/80 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-all shadow-sm z-30 group">
-                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
-            </Link>
+            <NavigationMenu />
 
             <div
                 className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-slate-100 dark:bg-slate-800 ring-4 ring-cyan-500/20 mb-6 relative group flex items-center justify-center cursor-pointer transition-transform active:scale-95"

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Box, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ProjectDialog, { type ProjectData } from '../components/ProjectDialog';
+import NavigationMenu from '../components/NavigationMenu';
 
 
 import attDashboard from '../assets/att_dashboard.png';
@@ -14,6 +15,22 @@ import dvUpload from '../assets/dv_upload.png';
 import dvDashboardLight from '../assets/dv_dashboardlight.png';
 import dvNotification from '../assets/dv_notification.png';
 import dvViewDoc from '../assets/dv_viewdoc.png';
+
+import adminDash from '../assets/admindash.png';
+import attRequestDialog from '../assets/att_requestdialog.png';
+import attUpload from '../assets/att_upload.png';
+
+import lprRLogin from '../assets/lpr_r_login.png';
+import lprRDashboard from '../assets/lpr_r_dashboard.png';
+import lprRVVManagement from '../assets/lpr_r_vvmanagement.png';
+import lprRAddVehicle from '../assets/lpr_r_addvehicle.png';
+import lprRAddVisitor from '../assets/lpr_r_addvisitor.png';
+
+import lprMPanel from '../assets/lpr_m_panel.png';
+import lprMResRegs from '../assets/lpr_m_resregs.png';
+import lprMParkings from '../assets/lpr_m_parkings.png';
+import lprMVisitors from '../assets/lpr_m_visitors.png';
+import lprMSpots from '../assets/lpr_m_spots.png';
 
 import competMainMenu from '../assets/compet_mainmenu.png';
 import competPlayTreatment from '../assets/compet_playtreatment.png';
@@ -37,20 +54,55 @@ const projectData: ProjectData[] = [
         id: 1,
         title: "Teklinx Web Projects",
         subtitle: "Degree Internship",
-        description: "During my internship at Teklinx, I contributed to various web development projects, focusing on frontend interfaces and user experience optimization. This collection highlights the diverse range of client solutions and internal tools I helped build.",
+        description: "During my internship at Teklinx, I contributed to various web development projects, focusing on frontend interfaces and user experience optimization. I collaborated closely with the backend team for seamless API integration and worked with UI/UX designers to implement pixel-perfect user interfaces matching their proposed designs.",
         layout: "horizontal",
         isPrivate: true,
         tags: ["Visual Studio", "TypeScript", "React.js", "Tailwind CSS", "IntelliJ", "Java", "PostgreSQL", "SpringBoot", "Docker"],
         images: [
-            { src: attDashboard, title: 'HR Attendance Dashboard', description: 'A comprehensive dashboard for internal management, featuring real-time data visualization and user role management.' },
-            { src: attViewAtt, title: 'Attendance Records', description: 'Detailed view of employee attendance records with filtering and export capabilities.' },
-            { src: attRequest, title: 'Attendance Requests', description: 'Interface for employees to submit attendance correction requests and view their status.' },
-            { src: dvDashboard, title: 'Document Vault Dashboard', description: 'Secure portal for clients to access project status, documents, and communication channels.' },
-            { src: dvUpload, title: 'Document Upload', description: 'Streamlined interface for uploading and categorizing secure documents.' },
-            { src: dvDashboardLight, title: 'Dashboard (Light Mode)', description: 'Alternative light theme for the Document Vault dashboard, offering a clean and bright user interface.' },
-            { src: dvNotification, title: 'Notification Center', description: 'Real-time notification system ensuring users stay updated on document changes and project announcements.' },
-            { src: dvViewDoc, title: 'Secure Document Viewer', description: 'Integrated document viewer allowing secure preview of sensitive files without direct download.' },
-        ]
+            { src: adminDash, title: 'Admin Dashboard', description: 'Centralized administration hub providing an overview of system activities and quick access to management tools.' }
+        ],
+        tabs: [
+            {
+                id: 'doc-vault',
+                title: 'Document Vault',
+                images: [
+                    { src: dvDashboard, title: 'Dashboard', description: 'I was tasked with the employee document vault. This is the main interface for the dashboard where employees can filter, search, and upload their documents.' },
+                    { src: dvUpload, title: 'Upload Interface', description: 'Employees can upload their documents. Identification cards and passports are limited to one document upload only.' },
+                    { src: dvDashboardLight, title: 'Dashboard (Light Mode)', description: 'This is the dashboard in light mode. Employees can view files pending admin approval and filter between their personal or HR documents using the tab filter on the top left.' },
+                    { src: dvNotification, title: 'Notification Center', description: 'Employees receive notifications here when their document is uploaded or when its status is updated by an admin.' },
+                    { src: dvViewDoc, title: 'Document Viewer', description: 'This is the document viewer view, displaying the rejection reason if a document has been rejected.' },
+                ]
+            },
+            {
+                id: 'attendance',
+                title: 'Attendance Management',
+                images: [
+                    { src: attDashboard, title: 'Admin Dashboard', description: 'I was responsible for the admin side of attendance management. Admins can view employee status, receive system alerts, and monitor daily attendance rates via the chart.' },
+                    { src: attViewAtt, title: 'Employee Details', description: 'Admins can view detailed employee profiles and their daily attendance records, as well as download attendance reports.' },
+                    { src: attRequest, title: 'Correction Requests', description: 'Employees can submit correction requests for their clock-in and clock-out times, which admins can then approve or deny.' },
+                    { src: attRequestDialog, title: 'Proof Verification', description: 'Admins can verify the proof documents submitted by employees to support their correction requests.' },
+                    { src: attUpload, title: 'Mass Upload', description: 'Admins can perform mass uploads of attendance sheets into the system and download the preset template for data entry.' },
+                ]
+            },
+            {
+                id: 'license-plate',
+                title: 'License Plate Registration (On Hold)',
+                images: [
+                    // Resident Side
+                    { src: lprRLogin, title: 'Unified Login', description: 'I developed the entire frontend for this system. This page handles login for both residents and management, with management access via the link below the login button.' },
+                    { src: lprRDashboard, title: 'Resident Dashboard', description: 'Personalized dashboard for residents to view their registered vehicles, active visitor passes, and community announcements.' },
+                    { src: lprRVVManagement, title: 'Vehicle & Visitor Management', description: 'This page allows residents to register their vehicles into the system and register visitors to assign them parking spots.' },
+                    { src: lprRAddVehicle, title: 'Register Vehicle', description: 'Form interface for residents to submit vehicle details for management approval and automated gate access.' },
+                    { src: lprRAddVisitor, title: 'Register Visitor', description: 'Visitor registration form allowing residents to pre-register guests and assign temporary parking spots.' },
+                    // Management Side
+                    { src: lprMPanel, title: 'Management Panel', description: 'This interface allows management to view the list of all residents along with their full details and available actions.' },
+                    { src: lprMResRegs, title: 'Resident Registration', description: 'Management can register new residents, automatically sending their login details via email.' },
+                    { src: lprMParkings, title: 'Parking Overview', description: 'Management can view the comprehensive status of all parking spots, seeing which are registered to residents or visitors.' },
+                    { src: lprMVisitors, title: 'Visitor Logs', description: 'This grid view displays a complete list of all registered visitors.' },
+                    { src: lprMSpots, title: 'Parking Spot Configuration', description: 'The Parking Spot Generation dialog allows management to specify levels and spots. It supports three methods: zone parking, adding a spot to an existing zone, and adding a single custom spot.' },
+                ]
+            }
+        ],
     },
     {
         id: 2,
@@ -96,9 +148,7 @@ const Projects: React.FC = () => {
     return (
         <div className="min-h-screen p-8 md:p-16 flex flex-col items-center relative">
             {/* Background Elements */}
-            <Link to="/" className="absolute top-6 left-6 p-2 rounded-full bg-white/80 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-all shadow-sm z-30 group">
-                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
-            </Link>
+            <NavigationMenu />
 
             <div className="w-full max-w-6xl mt-10 mb-12 flex flex-col items-center text-center">
                 <div className="w-20 h-20 bg-cyan-100 dark:bg-cyan-500/10 rounded-2xl flex items-center justify-center mb-6 animate-bounce">
@@ -127,7 +177,7 @@ const Projects: React.FC = () => {
                         <div className="w-full h-48 overflow-hidden relative">
                             <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10" />
                             <img
-                                src={project.images[0].src}
+                                src={project.images[0]?.src || project.tabs?.[0].images[0]?.src}
                                 alt={project.title}
                                 className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                             />
