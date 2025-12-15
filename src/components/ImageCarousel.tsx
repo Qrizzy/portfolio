@@ -95,7 +95,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, mode }) => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain bg-slate-200 dark:bg-slate-900/50"
                         />
                     </AnimatePresence>
 
@@ -123,8 +123,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, mode }) => {
                             key={idx}
                             onClick={() => setCurrentIndex(idx)}
                             className={`flex-shrink-0 w-20 h-full rounded-lg overflow-hidden border-2 transition-all ${idx === currentIndex
-                                    ? 'border-cyan-500 opacity-100'
-                                    : 'border-transparent opacity-60 hover:opacity-100'
+                                ? 'border-cyan-500 opacity-100'
+                                : 'border-transparent opacity-60 hover:opacity-100'
                                 }`}
                         >
                             <img src={img.src} alt="thumbnail" className="w-full h-full object-cover" />

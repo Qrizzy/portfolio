@@ -5,9 +5,25 @@ import { motion } from 'framer-motion';
 import ProjectDialog, { type ProjectData } from '../components/ProjectDialog';
 
 
-// Placeholder Helpers
-const getPlaceholder = (text: string, color: string) =>
-    `https://placehold.co/800x600/${color}/white?text=${encodeURIComponent(text)}`;
+import attDashboard from '../assets/att_dashboard.png';
+import attViewAtt from '../assets/att_viewatt.png';
+import attRequest from '../assets/att_request.png';
+import dvDashboard from '../assets/dv_dashboard.png';
+import dvUpload from '../assets/dv_upload.png';
+
+import competMainMenu from '../assets/compet_mainmenu.png';
+import competPlayTreatment from '../assets/compet_playtreatment.png';
+import competPlayQuiz from '../assets/compet_playquiz.png';
+import competLearnMenu from '../assets/compet_learnmenu.png';
+import competDetailedLearn from '../assets/compet_detailedlearn.png';
+import competPlayMenu from '../assets/compet_playmenu.png';
+
+import carBook from '../assets/car_book.png';
+import carHome from '../assets/car_home.png';
+import carLogin from '../assets/car_login.png';
+import carView from '../assets/car_view.png';
+
+
 
 const projectData: ProjectData[] = [
     {
@@ -19,9 +35,11 @@ const projectData: ProjectData[] = [
         isPrivate: true,
         tags: ["Visual Studio", "TypeScript", "React.js", "Tailwind CSS", "IntelliJ", "Java", "PostgreSQL", "SpringBoot", "Docker"],
         images: [
-            { src: getPlaceholder('Teklinx Project 1', '1e293b'), title: 'Corporate Dashboard', description: 'A comprehensive dashboard for internal management, featuring real-time data visualization and user role management.' },
-            { src: getPlaceholder('Teklinx Project 2', '3b4252'), title: 'E-Commerce Platform', description: 'Responsive frontend for a local fashion brand with integrated cart functionality and payment gateway interfaces.' },
-            { src: getPlaceholder('Teklinx Project 3', '2e3440'), title: 'Client Portal', description: 'Secure portal for clients to access project status, documents, and communication channels.' },
+            { src: attDashboard, title: 'HR Attendance Dashboard', description: 'A comprehensive dashboard for internal management, featuring real-time data visualization and user role management.' },
+            { src: attViewAtt, title: 'Attendance Records', description: 'Detailed view of employee attendance records with filtering and export capabilities.' },
+            { src: attRequest, title: 'Attendance Requests', description: 'Interface for employees to submit attendance correction requests and view their status.' },
+            { src: dvDashboard, title: 'Document Vault Dashboard', description: 'Secure portal for clients to access project status, documents, and communication channels.' },
+            { src: dvUpload, title: 'Document Upload', description: ' streamlined interface for uploading and categorizing secure documents.' },
         ]
     },
     {
@@ -34,9 +52,12 @@ const projectData: ProjectData[] = [
         downloadUrl: "https://drive.google.com/file/d/1txNmiBNRs2M-kIkKE1xvNWI-XgZB1EDb/view?usp=sharing",
         tags: ["Unity", "C#", "Blender", "Adobe Illustrator"],
         images: [
-            { src: getPlaceholder('COMPET 1', '5e81ac'), title: 'Main Game Interface', description: 'The primary game loop where users interact with their virtual pets, manage stats, and complete daily tasks.' },
-            { src: getPlaceholder('COMPET 2', '81a1c1'), title: 'Care Modules', description: 'Interactive learning modules covering topics like nutrition, hygiene, and health checkups.' },
-            { src: getPlaceholder('COMPET 3', '88c0d0'), title: 'Progress Tracking', description: 'User progress dashboard showing learning achievements and pet health statistics over time.' },
+            { src: competMainMenu, title: 'Main Game Interface', description: 'The primary game loop where users interact with their virtual pets, manage stats, and complete daily tasks.' },
+            { src: competPlayTreatment, title: 'Care Modules', description: 'Interactive learning modules covering topics like nutrition, hygiene, and health checkups.' },
+            { src: competPlayQuiz, title: 'Quiz Challenges', description: 'Educational quizzes that test player knowledge on various pet care topics.' },
+            { src: competLearnMenu, title: 'Learning Hub', description: 'Central hub for accessing educational content and tracking learning progress.' },
+            { src: competDetailedLearn, title: 'Detailed Learning', description: 'In-depth educational material for specific pet care topics.' },
+            { src: competPlayMenu, title: 'Minigame Menu', description: 'Selection screen for various minigames and activities.' },
         ]
     },
     {
@@ -48,9 +69,10 @@ const projectData: ProjectData[] = [
         githubUrl: "https://github.com/AnasHakimi/Car_Rental_Mobile_Application",
         tags: ["Kotlin", "Android Studio", "Prestige", "Adobe Illustrator"],
         images: [
-            { src: getPlaceholder('Car Rental 1', 'bf616a'), title: 'Vehicle Selection', description: 'Intuitive browsing experience with advanced filters for vehicle type, price range, and availability.' },
-            { src: getPlaceholder('Car Rental 2', 'd08770'), title: 'Booking Flow', description: 'Seamless booking process with integrated calendar selection, insurance options, and secure checkout.' },
-            { src: getPlaceholder('Car Rental 3', 'ebcb8b'), title: 'User Profile & History', description: 'Comprehensive user profile section managing active rentals, past history, and payment methods.' },
+            { src: carLogin, title: 'Login & Authentication', description: 'Secure login screen ensuring user data privacy and account protection.' },
+            { src: carHome, title: 'Home Dashboard', description: 'Main dashboard featuring featured vehicles, quick actions, and current rental status.' },
+            { src: carBook, title: 'Booking Interface', description: 'Streamlined booking flow allowing users to select dates, insurance, and extras.' },
+            { src: carView, title: 'Vehicle Details', description: 'Detailed view of vehicle specifications, features, and pricing.' },
         ]
     }
 ];
