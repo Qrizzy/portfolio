@@ -55,13 +55,13 @@ const IntroPage: React.FC = () => {
                 transition={{ delay: 1.5, duration: 0.8 }}
                 className="flex gap-8 pb-8"
             >
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-3 text-slate-500 dark:text-slate-400 hover:text-cyan-500 dark:hover:text-cyan-400 hover:bg-slate-200 dark:hover:bg-slate-800/50 rounded-full transition-all">
+                <a href="https://www.linkedin.com/in/anas-rizqin-bin-nordin-055372332/" target="_blank" rel="noopener noreferrer" className="p-3 text-slate-500 dark:text-slate-400 hover:text-cyan-500 dark:hover:text-cyan-400 hover:bg-slate-200 dark:hover:bg-slate-800/50 rounded-full transition-all">
                     <Linkedin className="w-6 h-6" />
                 </a>
-                <a href="mailto:email@gmail.com" className="p-3 text-slate-500 dark:text-slate-400 hover:text-purple-500 dark:hover:text-purple-400 hover:bg-slate-200 dark:hover:bg-slate-800/50 rounded-full transition-all">
+                <a href="mailto:anazrizqin@gmail.com" className="p-3 text-slate-500 dark:text-slate-400 hover:text-purple-500 dark:hover:text-purple-400 hover:bg-slate-200 dark:hover:bg-slate-800/50 rounded-full transition-all">
                     <Mail className="w-6 h-6" />
                 </a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800/50 rounded-full transition-all">
+                <a href="https://github.com/Qrizzy" target="_blank" rel="noopener noreferrer" className="p-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800/50 rounded-full transition-all">
                     <Github className="w-6 h-6" />
                 </a>
             </motion.div>
