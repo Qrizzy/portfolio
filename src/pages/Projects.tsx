@@ -11,12 +11,19 @@ import attRequest from '../assets/att_request.png';
 import dvDashboard from '../assets/dv_dashboard.png';
 import dvUpload from '../assets/dv_upload.png';
 
+import dvDashboardLight from '../assets/dv_dashboardlight.png';
+import dvNotification from '../assets/dv_notification.png';
+import dvViewDoc from '../assets/dv_viewdoc.png';
+
 import competMainMenu from '../assets/compet_mainmenu.png';
 import competPlayTreatment from '../assets/compet_playtreatment.png';
 import competPlayQuiz from '../assets/compet_playquiz.png';
 import competLearnMenu from '../assets/compet_learnmenu.png';
 import competDetailedLearn from '../assets/compet_detailedlearn.png';
 import competPlayMenu from '../assets/compet_playmenu.png';
+import competPlayTool from '../assets/compet_playtool.png';
+import competPointShop from '../assets/compet_pointshop.png';
+import competPointShopUnequipped from '../assets/compet_pointshpoeunequipped.png';
 
 import carBook from '../assets/car_book.png';
 import carHome from '../assets/car_home.png';
@@ -39,7 +46,10 @@ const projectData: ProjectData[] = [
             { src: attViewAtt, title: 'Attendance Records', description: 'Detailed view of employee attendance records with filtering and export capabilities.' },
             { src: attRequest, title: 'Attendance Requests', description: 'Interface for employees to submit attendance correction requests and view their status.' },
             { src: dvDashboard, title: 'Document Vault Dashboard', description: 'Secure portal for clients to access project status, documents, and communication channels.' },
-            { src: dvUpload, title: 'Document Upload', description: ' streamlined interface for uploading and categorizing secure documents.' },
+            { src: dvUpload, title: 'Document Upload', description: 'Streamlined interface for uploading and categorizing secure documents.' },
+            { src: dvDashboardLight, title: 'Dashboard (Light Mode)', description: 'Alternative light theme for the Document Vault dashboard, offering a clean and bright user interface.' },
+            { src: dvNotification, title: 'Notification Center', description: 'Real-time notification system ensuring users stay updated on document changes and project announcements.' },
+            { src: dvViewDoc, title: 'Secure Document Viewer', description: 'Integrated document viewer allowing secure preview of sensitive files without direct download.' },
         ]
     },
     {
@@ -52,12 +62,15 @@ const projectData: ProjectData[] = [
         downloadUrl: "https://drive.google.com/file/d/1txNmiBNRs2M-kIkKE1xvNWI-XgZB1EDb/view?usp=sharing",
         tags: ["Unity", "C#", "Blender", "Adobe Illustrator"],
         images: [
-            { src: competMainMenu, title: 'Main Game Interface', description: 'The primary game loop where users interact with their virtual pets, manage stats, and complete daily tasks.' },
-            { src: competPlayTreatment, title: 'Care Modules', description: 'Interactive learning modules covering topics like nutrition, hygiene, and health checkups.' },
-            { src: competPlayQuiz, title: 'Quiz Challenges', description: 'Educational quizzes that test player knowledge on various pet care topics.' },
-            { src: competLearnMenu, title: 'Learning Hub', description: 'Central hub for accessing educational content and tracking learning progress.' },
-            { src: competDetailedLearn, title: 'Detailed Learning', description: 'In-depth educational material for specific pet care topics.' },
-            { src: competPlayMenu, title: 'Minigame Menu', description: 'Selection screen for various minigames and activities.' },
+            { src: competMainMenu, title: 'Main Game Interface', description: 'The central hub where players start their journey, access game modes, and interact with their virtual pet.' },
+            { src: competPlayMenu, title: 'Gameplay Menu', description: 'Gateway to gameplay, encouraging study before quizzes and offering access to pet customization.' },
+            { src: competLearnMenu, title: 'Disease Learning Hub', description: 'Educational dashboard displaying ten key feline diseases featured in the game for players to study.' },
+            { src: competDetailedLearn, title: 'Detailed Disease Info', description: 'Detailed disease profiles covering definitions, symptoms, effects, and whether self-treatment is viable.' },
+            { src: competPointShopUnequipped, title: 'Accessory Shop', description: 'In-game marketplace for browsing and purchasing accessories to personalize the player\'s cat.' },
+            { src: competPlayQuiz, title: 'Diagnostic Quizzes', description: 'Knowledge-testing quizzes where answering correctly on the first attempt yields bonus points.' },
+            { src: competPlayTool, title: 'Tool Selection', description: 'Critical decision phase: choose the right tool for treatment or refer to a vet for complex cases.' },
+            { src: competPlayTreatment, title: 'Treatment Minigames', description: 'Interactive treatment minigames for self-treatable conditions, such as nail trimming, to earn points.' },
+            { src: competPointShop, title: 'Customization Inventory', description: 'Inventory and equipment screen where players can equip purchased items to customize their pet.' },
         ]
     },
     {
@@ -71,7 +84,7 @@ const projectData: ProjectData[] = [
         images: [
             { src: carLogin, title: 'Login & Authentication', description: 'Secure login screen ensuring user data privacy and account protection.' },
             { src: carHome, title: 'Home Dashboard', description: 'Main dashboard featuring featured vehicles, quick actions, and current rental status.' },
-            { src: carBook, title: 'Booking Interface', description: 'Streamlined booking flow allowing users to select dates, insurance, and extras.' },
+            { src: carBook, title: 'Booking Interface', description: 'Streamlined booking interface enabling users to select their preferred date and time, and add remarks to complete the car reservation.' },
             { src: carView, title: 'Vehicle Details', description: 'Detailed view of vehicle specifications, features, and pricing.' },
         ]
     }
@@ -156,22 +169,23 @@ const Projects: React.FC = () => {
                 ))}
             </div>
 
-            <Link
-                to="/profile/skills"
-                className="mt-20 flex items-center gap-2 text-slate-500 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"
-            >
-                <ArrowLeft className="w-5 h-5" />
-                <span>Back to Skills</span>
-            </Link>
+            <div className="w-full max-w-7xl px-4 mt-20 flex justify-between items-center">
+                <Link
+                    to="/profile/skills"
+                    className="flex items-center gap-2 text-slate-500 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"
+                >
+                    <ArrowLeft className="w-5 h-5" />
+                    <span>Back to Skills</span>
+                </Link>
 
-            <Link
-                to="/contact"
-                className="mt-4 flex items-center gap-2 text-slate-500 dark:text-slate-500 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
-                style={{ marginTop: '1rem' }}
-            >
-                <span>Get in Touch</span>
-                <ArrowRight className="w-5 h-5" />
-            </Link>
+                <Link
+                    to="/contact"
+                    className="flex items-center gap-2 text-slate-500 dark:text-slate-500 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+                >
+                    <span>Get in Touch</span>
+                    <ArrowRight className="w-5 h-5" />
+                </Link>
+            </div>
 
             {/* Project Details Dialog */}
             <ProjectDialog

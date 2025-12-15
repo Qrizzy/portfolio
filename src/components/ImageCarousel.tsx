@@ -116,19 +116,18 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, mode }) => {
                     </div>
                 </div>
 
-                {/* Thumbnails Strip (Optional but good for "vertical carousel" feel) */}
-                <div className="h-20 flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-200 dark:scrollbar-thumb-slate-700 pb-2">
-                    {images.map((img, idx) => (
+                {/* Dots Navigation */}
+                <div className="flex justify-center gap-2 py-4">
+                    {images.map((_, idx) => (
                         <button
                             key={idx}
                             onClick={() => setCurrentIndex(idx)}
-                            className={`flex-shrink-0 w-20 h-full rounded-lg overflow-hidden border-2 transition-all ${idx === currentIndex
-                                ? 'border-cyan-500 opacity-100'
-                                : 'border-transparent opacity-60 hover:opacity-100'
+                            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${idx === currentIndex
+                                    ? 'bg-cyan-500 w-8'
+                                    : 'bg-slate-300 dark:bg-slate-700 hover:bg-cyan-400/50'
                                 }`}
-                        >
-                            <img src={img.src} alt="thumbnail" className="w-full h-full object-cover" />
-                        </button>
+                            aria-label={`Go to slide ${idx + 1}`}
+                        />
                     ))}
                 </div>
             </div>
