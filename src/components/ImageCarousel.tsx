@@ -106,9 +106,11 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, mode }) => {
                 </div>
 
                 <FullscreenModal
-                    image={activeImage}
+                    images={images}
+                    currentIndex={currentIndex}
                     isOpen={isFullscreen}
                     onClose={() => setIsFullscreen(false)}
+                    onIndexChange={setCurrentIndex}
                 />
             </>
         );
@@ -139,9 +141,11 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, mode }) => {
                     </AnimatePresence>
 
                     <FullscreenModal
-                        image={images[currentIndex]}
+                        images={images}
+                        currentIndex={currentIndex}
                         isOpen={isFullscreen}
                         onClose={() => setIsFullscreen(false)}
+                        onIndexChange={setCurrentIndex}
                     />
 
                     {/* Floating Nav for Mobile/Tablet or just visual aid */}
@@ -252,8 +256,35 @@ const InteractiveCaption: React.FC<{ title: string; description: string }> = ({ 
 };
 
 // Fullscreen Image Modal
-const FullscreenModal: React.FC<{ image: CarouselImage; isOpen: boolean; onClose: () => void }> = ({ image, isOpen, onClose }) => {
+const FullscreenModal: React.FC<{
+    images: CarouselImage[];
+    currentIndex: number;
+    isOpen: boolean;
+    onClose: () => void;
+    onIndexChange: (index: number) => void;
+}> = ({ images, currentIndex, isOpen, onClose, onIndexChange }) => {
+
+    // Handle keyboard navigation
+    React.useEffect(() => {
+        if (!isOpen) return;
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'ArrowLeft') {
+                onIndexChange((currentIndex - 1 + images.length) % images.length);
+            } else if (e.key === 'ArrowRight') {
+                onIndexChange((currentIndex + 1) % images.length);
+            } else if (e.key === 'Escape') {
+                onClose();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isOpen, currentIndex, images.length, onIndexChange, onClose]);
+
     if (!isOpen) return null;
+
+    const activeImage = images[currentIndex];
 
     return (
         <AnimatePresence>
@@ -263,27 +294,53 @@ const FullscreenModal: React.FC<{ image: CarouselImage; isOpen: boolean; onClose
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={onClose}
-                    className="fixed inset-0 bg-black/90 z-[70] flex items-center justify-center p-4 cursor-zoom-out"
+                    className="fixed inset-0 bg-black/95 z-[70] flex items-center justify-center p-4 cursor-zoom-out"
                 >
+                    {/* Navigation Buttons */}
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onIndexChange((currentIndex - 1 + images.length) % images.length);
+                        }}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-[80] group"
+                    >
+                        <ChevronLeft className="w-8 h-8 group-hover:scale-110 transition-transform" />
+                    </button>
+
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onIndexChange((currentIndex + 1) % images.length);
+                        }}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-[80] group"
+                    >
+                        <ChevronRight className="w-8 h-8 group-hover:scale-110 transition-transform" />
+                    </button>
+
                     <motion.img
-                        initial={{ scale: 0.9 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0.9 }}
-                        src={image.src}
-                        alt={image.title}
-                        className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+                        key={currentIndex} // Key change triggers animation
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        src={activeImage.src}
+                        alt={activeImage.title}
+                        className="max-w-[85vw] max-h-[85vh] object-contain rounded-lg shadow-2xl"
                         onClick={(e) => e.stopPropagation()}
                     />
+
                     <button
                         onClick={onClose}
-                        className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
+                        className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[80]"
                     >
-                        <ChevronRight className="w-6 h-6 rotate-45" /> {/* Using Chevron rotated as Close icon for simplicity or import X */}
+                        <ChevronRight className="w-6 h-6 rotate-45" />
                     </button>
-                    <div className="absolute bottom-0 left-0 right-0 p-8 pt-20 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none">
-                        <div className="text-center text-white/90">
-                            <h3 className="text-xl font-bold mb-2">{image.title}</h3>
-                            <p className="text-sm opacity-80 max-w-2xl mx-auto">{image.description}</p>
+
+                    <div className="absolute bottom-0 left-0 right-0 p-8 pt-24 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
+                        <div className="text-center text-white/90 max-w-4xl mx-auto">
+                            <h3 className="text-2xl font-bold mb-3 text-cyan-400">{activeImage.title}</h3>
+                            <p className="text-base opacity-90 leading-relaxed">{activeImage.description}</p>
+                            <p className="text-xs opacity-50 mt-4 font-mono">{currentIndex + 1} / {images.length}</p>
                         </div>
                     </div>
                 </motion.div>

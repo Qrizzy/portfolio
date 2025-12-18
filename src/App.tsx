@@ -7,6 +7,7 @@ import About from './pages/About';
 import Skills from './pages/Skills';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
+import InternshipPresentation from './pages/InternshipPresentation';
 
 const App: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ const App: React.FC = () => {
           </Route>
 
           <Route path="projects" element={<Projects />} />
+          <Route path="internship-presentation" element={<InternshipPresentation />} />
           <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>

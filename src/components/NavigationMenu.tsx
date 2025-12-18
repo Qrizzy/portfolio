@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Home, User, Zap, FolderGit2, Mail } from 'lucide-react';
+import { Menu, X, Home, User, Zap, FolderGit2, Mail, MonitorPlay } from 'lucide-react';
 
 const NavigationMenu: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -94,8 +94,25 @@ const NavigationMenu: React.FC = () => {
                                 })}
                             </nav>
 
+                            {/* Internship Presentation Link - Pushed to Bottom */}
+                            <div className="pt-2 border-t border-slate-100 dark:border-slate-800 mb-2">
+                                <NavLink
+                                    to="/internship-presentation"
+                                    onClick={() => setIsOpen(false)}
+                                    className={({ isActive }) => `
+                                        flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 w-full
+                                        ${isActive
+                                            ? 'bg-cyan-50 dark:bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-semibold'
+                                            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200'}
+                                    `}
+                                >
+                                    <MonitorPlay className={`w-5 h-5 ${location.pathname === '/internship-presentation' ? 'text-cyan-500' : 'text-slate-400'}`} />
+                                    <span>Internship</span>
+                                </NavLink>
+                            </div>
+
                             {/* Footer */}
-                            <div className="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800">
+                            <div className="pt-2">
                                 <p className="text-xs text-center text-slate-400 dark:text-slate-500">
                                     © 2025 Anas Rizqin
                                 </p>
